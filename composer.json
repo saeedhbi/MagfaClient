@@ -1,5 +1,5 @@
 {
-	"name" : "Magfa Client",
+	"name" : "opilo/magfaclient",
 	"description" : "Php Magfa Client",
 	"keywords" : [
 		"magfa",
@@ -20,7 +20,7 @@
 	},
 	"autoload" : {
 		"psr-0" : {
-			"MagfaClient" : "./"
+			"magfaclient" : "./"
 		}
 	},
 	"minimum-stability" : "beta"
