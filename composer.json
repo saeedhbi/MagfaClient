@@ -1,5 +1,5 @@
 {
-	"name" : "magfaclient",
+	"name" : "opilo/magfaclient",
 	"description" : "Php Magfa Client",
 	"keywords" : [
 		"magfa",
