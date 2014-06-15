@@ -19,8 +19,8 @@
 		"curl/curl" : "dev-master"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"MagfaClient" : "./"
+		"psr-4" : {
+			"MagfaClient//" : ""
 		}
 	},
 	"minimum-stability" : "beta"
