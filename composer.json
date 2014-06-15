@@ -20,7 +20,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"MagfaClient//" : ""
+			"MagfaClient//" : "" 
 		}
 	},
 	"minimum-stability" : "beta"
