@@ -10,6 +10,6 @@ class MagfaClient
     }
     
     public function connect($wsdl){
-        return new SoapClient($wsdl);
+        return new SoapClient($wsdl); 
     }
 }
