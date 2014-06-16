@@ -33,10 +33,10 @@ class MagfaClient
      * @param string $wsdl            
      * @param array $login            
      */
-    public function __construct($wsdl, $login)
+    public function __construct($connect)
     {
         $this->error();
-        $this->connection = $this->connect($wsdl, $login);        
+        $this->connection = $this->connect($connect);        
     }
 
     /**
@@ -47,9 +47,15 @@ class MagfaClient
      *
      * @return object
      */
-    public function connect($wsdl, $login)
+    public function connect($connect)
     {
-        return new SoapClient($wsdl, $login);
+        $params = array(
+            'login' => $connect['username'],
+            'password' => $connect['password'], // Credientials
+            'features' => SOAP_USE_XSI_ARRAY_TYPE // Required
+            //,'trace' => true // Optional (debug)
+        );
+        return new SoapClient($connect['wsdl'], $params);
     }
 
     /**
