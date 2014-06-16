@@ -36,7 +36,7 @@ class MagfaClient
     public function __construct($wsdl, $login)
     {
         $this->error();
-        $this->connection = $this->connect($wsdl, $login);
+        $this->connection = $this->connect($wsdl, $login);        
     }
 
     /**
@@ -155,16 +155,16 @@ class MagfaClient
             'senderNumbers' => array(
                 $params['senderNumbers']
             )
-        );
+        );      
         
-        $response = $this->call('enqueue', $params);
+        $response = $this->call('enqueue', $params);        
         
         foreach ($response as $result) {
             // compare the response with the ERROR_MAX_VALUE
             if ($result <= $this->ERROR_MAX_VALUE) {
-                echo "Error Code : $result ; Error Title : " . $this->error[$result]['title'] . ' {' . $this->error[$result]['desc'] . '}' . $this->outputSeparator;
+                var_dump("Error Code : $result ; Error Title : " . $this->error[$result]['title'] . ' {' . $this->error[$result]['desc'] . '}' . $this->outputSeparator);
             } else {
-                echo "Message has been successfully sent";
+                var_dump("Message has been successfully sent");
             }
         }
     }
