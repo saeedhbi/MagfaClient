@@ -20,10 +20,7 @@
 	},
 	"autoload" : {
 		"psr-4" : {
-			"MagfaClient\\" : ""
-		},
-		"psr-0" : {
-			"" : "src"
+			"MagfaClient\\" : "src"
 		}
 	},
 	"require-dev" : {
