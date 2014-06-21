@@ -78,6 +78,20 @@ class SoapConnection implements ConnectionInterface
     }
 
     /**
+     * Send request to specified provider
+     *
+     * @param string $method            
+     * @return mixed
+     */
+    public function request($method)
+    {
+        if (method_exists($this, $method)) {
+            return $this->{$method}();
+        } else
+            throw new MagfaSOAPException('Method is not exist.');
+    }
+
+    /**
      * Class to getCredit from provider
      *
      * @return object
@@ -133,7 +147,7 @@ class SoapConnection implements ConnectionInterface
             throw new MagfaSOAPException($e->faultstring, 401);
         }
     }
-    
+
     /**
      * Class to getMessageId from provider
      *
@@ -146,13 +160,13 @@ class SoapConnection implements ConnectionInterface
                 'domain' => $this->datasets['domain'],
                 'checkingMessageId' => $this->datasets['checkingMessageId']
             ));
-    
+            
             return $s;
         } catch (SoapFault $e) {
             throw new MagfaSOAPException($e->faultstring, 401);
         }
     }
-    
+
     /**
      * Class to getMessageStatus from provider
      *
@@ -162,15 +176,15 @@ class SoapConnection implements ConnectionInterface
     {
         try {
             $s = $this->connect()->__soapCall('getMessageStatus', array(
-                'messageId' => $this->datasets['messageId']               
+                'messageId' => $this->datasets['messageId']
             ));
-    
+            
             return $s;
         } catch (SoapFault $e) {
             throw new MagfaSOAPException($e->faultstring, 401);
         }
     }
-    
+
     /**
      * Class to getMessageStatuses from provider
      *
@@ -180,9 +194,9 @@ class SoapConnection implements ConnectionInterface
     {
         try {
             $s = $this->connect()->__soapCall('getMessageStatuses', array(
-                'messageId' => $this->datasets['messageId']               
+                'messageId' => $this->datasets['messageId']
             ));
-    
+            
             return $s;
         } catch (SoapFault $e) {
             throw new MagfaSOAPException($e->faultstring, 401);
