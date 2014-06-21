@@ -1,7 +1,7 @@
 <?php
-namespace AsanakClient;
+namespace MagfaClient;
 
-use Exceptions\AsanakSOAPException;
+use Exceptions\MagfaSOAPException;
 use ConnectionInterface;
 
 class CurlConnection implements ConnectionInterface
