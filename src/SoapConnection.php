@@ -36,16 +36,16 @@ class SoapConnection implements ConnectionInterface
      *
      * @return object
      */
-    public function connect($connect)
+    public function connect()
     {
         if (empty($this->connection)) {
             try {
                 $params = array(
-                    'login' => $connect['username'],
-                    'password' => $connect['password'], // Credientials
+                    'login' => $this->datasets['username'],
+                    'password' => $this->datasets['password'], // Credientials
                     'features' => SOAP_USE_XSI_ARRAY_TYPE // Required
                                 );
-                $this->connection = new SoapClient($connect['wsdl'], $params);
+                $this->connection = new SoapClient($this->datasets['wsdl'], $params);
             } catch (SoapFault $e) {
                 throw new MagfaSOAPException($e->faultstring, 401);
             }
@@ -61,7 +61,7 @@ class SoapConnection implements ConnectionInterface
     public function sendSms()
     {
         try {
-            $s = $this->connection->__soapCall('enqueue', array(
+            $s = $this->connect()->__soapCall('enqueue', array(
                 'domain' => $this->datasets['domain'],
                 'messageBodies' => array(
                     $this->datasets['messageBodies']
@@ -85,7 +85,7 @@ class SoapConnection implements ConnectionInterface
     public function getCredit()
     {
         try {
-            $s = $this->connection->__soapCall('getCredit', array(
+            $s = $this->connect()->__soapCall('getCredit', array(
                 'domain' => $this->datasets['domain']
             ));
             
@@ -103,7 +103,7 @@ class SoapConnection implements ConnectionInterface
     public function getAllMessages()
     {
         try {
-            $s = $this->connection->__soapCall('getAllMessages', array(
+            $s = $this->connect()->__soapCall('getAllMessages', array(
                 'domain' => $this->datasets['domain'],
                 'numberOfMessasges' => $this->datasets['numberOfMessasges']
             ));
@@ -122,7 +122,7 @@ class SoapConnection implements ConnectionInterface
     public function getAllMessagesWithNumber()
     {
         try {
-            $s = $this->connection->__soapCall('getAllMessagesWithNumber', array(
+            $s = $this->connect()->__soapCall('getAllMessagesWithNumber', array(
                 'domain' => $this->datasets['domain'],
                 'numberOfMessasges' => $this->datasets['numberOfMessasges'],
                 'destNumber' => $this->datasets['destNumber']
@@ -142,7 +142,7 @@ class SoapConnection implements ConnectionInterface
     public function getMessageId()
     {
         try {
-            $s = $this->connection->__soapCall('getMessageId', array(
+            $s = $this->connect()->__soapCall('getMessageId', array(
                 'domain' => $this->datasets['domain'],
                 'checkingMessageId' => $this->datasets['checkingMessageId']
             ));
@@ -161,7 +161,7 @@ class SoapConnection implements ConnectionInterface
     public function getMessageStatus()
     {
         try {
-            $s = $this->connection->__soapCall('getMessageStatus', array(
+            $s = $this->connect()->__soapCall('getMessageStatus', array(
                 'messageId' => $this->datasets['messageId']               
             ));
     
@@ -179,7 +179,7 @@ class SoapConnection implements ConnectionInterface
     public function getMessageStatuses()
     {
         try {
-            $s = $this->connection->__soapCall('getMessageStatuses', array(
+            $s = $this->connect()->__soapCall('getMessageStatuses', array(
                 'messageId' => $this->datasets['messageId']               
             ));
     
